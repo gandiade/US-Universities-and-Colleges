@@ -80,13 +80,15 @@ var colors = chroma.scale('Dark2').mode('lch').colors(3);
 // 3. Add University GeoJSON Data
 
 university_locations = L.geoJson.ajax("assets/unipoints2.geojson",{
-    
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.NAME);
+  },
     pointToLayer: function(feature, lnglat) {
     var id = 0;
     return L.marker(lnglat, {icon: L.divIcon({className: 'fa-solid fa-user-graduate'})});
   },
     
-    attribution: 'Airbnb Listings &copy; Inside Airbnb | Asheville Zoning Districts &copy; City of Asheville Open Data | Base Map &copy; CartoDB | Map Author: Diana Gandia'
+    attribution: 'wordsrated.com &copy; College Student Enrollment | Colleges and Universities &copy; Homeland Infrastructure Foundation Level Data| Base Map &copy; CartoDB | Map Author: Diana Gandia'
 });
 
 // Add the Airbnbs to the map.
@@ -128,11 +130,13 @@ legend.onAdd = function () {
     div.innerHTML += '<b>Student Population</b><br />';
     //notice the class breaks entered at the end of the next 5 lines
     //the colors specify the shade of purple that we used to do the polygon shading
-    div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>107+</p>';
-    div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>80-106</p>';
-    div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>53-79</p>';
-    div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>26-52</p>';
-    div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p> 0-25</p>';
+    div.innerHTML += '<i style="background: ' + colors[6] + '; opacity: 0.5"></i><p>2,544,194+</p>';
+    div.innerHTML += '<i style="background: ' + colors[5] + '; opacity: 0.5"></i><p>543,375-2,544,194</p>';
+    div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>322,543-543,374</p>';
+    div.innerHTML += '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p>195,210-322,542</p>';
+    div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>74,695-195,209</p>';
+    div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>20,930-74,694</p>';
+    div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p> 0-20929</p>';
     //this line provides the legend title for the airbnb colored symbols
     div.innerHTML += '<hr><b>University<b><br />';
     //the next 3 lines call the airbnb icon along with its proper color
